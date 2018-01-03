@@ -17,7 +17,7 @@ Via Composer
 $ composer require johnykvsky/deliverycalculator
 ```
 
-## Usage
+## Usage to Poland
 
 ``` php
 $dlvCalc = new johnykvsky\Utils\DeliveryCalculator();
@@ -26,6 +26,17 @@ $dlvCalc->setShippingProvider($provider); //from Poland
 $dlvCalc->setDeliveryProvider($provider); //to Poland
 $result = $dlvCalc->calculateDeliveryDate(14, '2017-10-20'); //Get delivery date, shipping on 2017-10-20, deliver in 14 working days
 echo $result->format('Y-m-d'); //2017-11-10
+```
+
+## Usage to Brazil
+
+``` php
+$dlvCalc = new johnykvsky\Utils\DeliveryCalculator();
+$provider = new johnykvsky\Utils\PolishDeliveryProvider(); // We want to ship/deliver in Brazil
+$dlvCalc->setShippingProvider($provider); // from Brazil
+$dlvCalc->setDeliveryProvider($provider); // to Brazil
+$result = $dlvCalc->calculateDeliveryDate(14, '2017-10-10'); //Get delivery date, shipping on 2017-10-10, deliver in 14 working days
+echo $result->format('Y-m-d'); // 2017-10-31 disregarding weekends and holidays 2017-10-12
 ```
 
 DeliveryCalculator depends on providers, however, you can create one generic provider and use it for all calculations, modifying on the fly (getters/setters) timezones, holidays and delivery-free days (ie. when client paid for delivery on sunday).
